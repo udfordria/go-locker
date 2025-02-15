@@ -16,10 +16,10 @@ func NewLocker[A any](initialValue A) Locker[A] {
 	}
 }
 
-func (rw *Locker[A]) Read() A {
+func (rw *Locker[A]) Read() *A {
 	rw.m.RLock()
 	defer rw.m.RUnlock()
-	return rw.value
+	return &rw.value
 }
 
 func (rw *Locker[A]) Set(cb func(*A) *A) {
